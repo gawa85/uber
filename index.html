@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viaje Uber San Fernando ↔ CABA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #222;
+    }
+    button {
+      background-color: #111;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background-color: #2d2d2d;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚗 Viajes Uber San Fernando ↔ CABA</h1>
+  <button onclick="abrirUber('ida')">Ir a Capital Federal</button>
+  <button onclick="abrirUber('vuelta')">Volver a San Fernando</button>
+
+  <script>
+    function abrirUber(direccion) {
+      const sanFernando = {
+        addressLine1: "Ituzaingó 1552",
+        addressLine2: "B1646 San Fernando, Provincia de Buenos Aires",
+        id: "ChIJaxxuzXqlvJURSfT9bEAWsjw",
+        source: "SEARCH",
+        latitude: -34.4399308,
+        longitude: -58.5637304,
+        provider: "google_places"
+      };
+
+      const caba = {
+        addressLine1: "Cerrito 740",
+        addressLine2: "Cdad. Autónoma de Buenos Aires",
+        id: "EkBDZXJyaXRvIDc0MCwgQzEwMTBBQVAgQ2RhZC4gQXV0w7Nub21hIGRlIEJ1ZW5vcyBBaXJlcywgQXJnZW50aW5hIjESLwoUChIJByNAfcjKvJURSS3IAdaEHTYQ5AUqFAoSCaeDTQ7IyryVEayvn5yrGAAX",
+        source: "SEARCH",
+        latitude: -34.6000212,
+        longitude: -58.3826203,
+        provider: "google_places"
+      };
+
+      const pickup = direccion === "ida" ? sanFernando : caba;
+      const dropoff = direccion === "ida" ? caba : sanFernando;
+
+      const params = new URLSearchParams({
+        pickup: JSON.stringify(pickup),
+        "drop[0]": JSON.stringify(dropoff),
+        uclick_id: crypto.randomUUID(),
+        vehicle: "12137"
+      });
+
+      const url = "https://m.uber.com/go/product-selection?" + params.toString();
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
