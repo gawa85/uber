@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viaje Uber San Fernando ↔ GPetersen</title>
+  <title>Viajes Uber</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -35,21 +35,32 @@
   </style>
 </head>
 <body>
-  <h1>🚗 Viajes Uber San Fernando ↔ Gpetersen</h1>
+  <h1>🚗 Viajes Uber</h1>
   <button onclick="abrirUber('ida')">Ir a Grupo Petersen</button>
+  <button onclick="abrirUber('vueltaclub')">Ir a Club San Fernando</button>
   <button onclick="abrirUber('vuelta')">Ir a casa</button>
 
   <script>
     function abrirUber(direccion) {
+      const club = {
+        addressLine1: "Club San Fernando",
+        addressLine2: "Escalada, B1646 San Fernando, Provincia de Buenos Aires",        
+        id: "ChIJA-Qg-IevvJURhXwYzCJSQ0s",
+        source: "SEARCH",
+        latitude: -34.4365592,
+        longitude: -58.5543364,
+        provider: "google_places"
+      };
+
       const sanFernando = {
-        addressLine1: "Ituzaingó 1552",
+        addressLine1: "Sarmiento",
         addressLine2: "B1646 San Fernando, Provincia de Buenos Aires",
         id: "ChIJaxxuzXqlvJURSfT9bEAWsjw",
         source: "SEARCH",
         latitude: -34.4399308,
         longitude: -58.5637304,
         provider: "google_places"
-      };
+      };      
 
       const caba = {
         addressLine1: "Cerrito 740",
@@ -63,7 +74,7 @@
 
       const pickup = direccion === "ida" ? sanFernando : caba;
       const dropoff = direccion === "ida" ? caba : sanFernando;
-
+ 
       const params = new URLSearchParams({
         pickup: JSON.stringify(pickup),
         "drop[0]": JSON.stringify(dropoff),
