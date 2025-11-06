@@ -37,7 +37,7 @@
 <body>
   <h1>🚗 Viajes Uber</h1>
   <button onclick="abrirUber('ida')">Ir a Grupo Petersen</button>
-  <button onclick="abrirUber('vueltaclub')">Ir a Club San Fernando</button>
+  <button onclick="abrirUber('club')">Ir a Club San Fernando</button>
   <button onclick="abrirUber('vuelta')">Ir a casa</button>
 
   <script>
@@ -74,7 +74,7 @@
 
       const pickup = direccion === "ida" ? sanFernando : caba;
       const dropoff = direccion === "ida" ? caba : sanFernando;
- 
+      const dropoff = direccion === "club" ? club : dropoff;
       const params = new URLSearchParams({
         pickup: JSON.stringify(pickup),
         "drop[0]": JSON.stringify(dropoff),
