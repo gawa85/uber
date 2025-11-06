@@ -73,8 +73,14 @@
       };
 
       const pickup = direccion === "ida" ? sanFernando : caba;
-      const dropoff = direccion === "ida" ? caba : sanFernando;
-      const dropoff = direccion === "club" ? club : dropoff;
+    let dropoff;
+    if (direccion === "ida") {
+      dropoff = caba;
+    } else if (direccion === "club") {
+      dropoff = club;
+    } else {
+      dropoff = sanFernando;
+    }
       const params = new URLSearchParams({
         pickup: JSON.stringify(pickup),
         "drop[0]": JSON.stringify(dropoff),
